@@ -31,12 +31,37 @@
     </section>
     <!--Here goes to footer-->
     <footer>
+         <div id="parametros">
+            <label for="renglones">Renglones:</label>
+            <input id="renglones" value="100">
+            <label for="columnas">Columnas:</label>
+            <input id="columnas" value="100">
+            <label for="tamanio">Tama&ntilde;o de las c&eacute;lulas</label>
+            <input id="tamanio" value="4">   
+        </div>
+
+        <div id="informacion">
+          <p class="informacion">Generación: 0</p>
+        </div>
+        
+        <div id="controles">
+                <button class="rounded-button" id="comenzar">Comenzar</button>
+                <button class="rounded-button" id="detener">Pausar</button>
+                <button class="rounded-button" id="tick">Hacer tick</button>
+                <button class="rounded-button" id="reiniciar">Reiniciar el Universo</button>
+        </div>
+        
         <div id="footer-buttons">
             <button class="rounded-button">Botón 1</button>
             <button class="rounded-button">Botón 2</button>
             <button class="rounded-button">Botón 3</button>
         </div>
+        
+         <label for="favcolor">Seleccione color vivo!</label>
+        <input type="color" id="favcolor" name="favcolor" value="#ff0000">
     </footer>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/index.js"></script>
 </body>
 </html>
