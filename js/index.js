@@ -108,3 +108,33 @@ const closeInstructions = document.getElementById("close-instructions");
 closeInstructions.addEventListener("click", () => {
     instructions.style.display = "none";
 })
+
+var renglones            = 50;
+var columnas             = 50;
+var tamCelulas           = 4; // Normalmente es 4
+var cantidadGeneraciones = 0; // Mayor para relantizar la vida 
+
+//Control
+$(document).ready(function(){
+    var funcionTiempo; //Contiene el control del tiempo.
+    //generarUniverso();
+  
+    $("#tick").click(function(event){
+      console.log("Se avanza un tick en el tiempo.");
+    });
+  
+    $("#comenzar").click(function(event){
+      console.log("El tiempo se echa a andar.");
+      window.clearInterval(funcionTiempo); //Se detiene cualquier otro ciclo anterior.
+    });
+  
+    $("#detener").click(function(event){
+      console.log("Se detiene la simulación");
+      window.clearInterval(funcionTiempo);
+    });
+  
+    $("#reiniciar").click(function(event){
+      console.log("Se reinicia la vida en el universo");
+      //generarUniverso();
+    });
+  });
