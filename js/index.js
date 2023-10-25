@@ -18,11 +18,18 @@ document.addEventListener("keydown", (e) => {
             exchangePlay();
             break;
         case 8:
-            clean(); //eararse key    
+            clean(); // Eararse key    
         default:
             break;
     }
 });
+
+setInterval(() => {
+    if (playStatus) {
+        nextState()
+    }
+}, 1000 / 60);
+
 
 //Here is the instructions sections
 const instructions = document.getElementById("instructions");
@@ -50,25 +57,6 @@ function generateTheBoard(){
     }
     html += "</table>"
 
-    setInterval(() => {
-        if (playStatus) {
-            nextState()
-        }
-    }, 1000 / 60);
-
-    
-    function exchangePlay() {
-        playStatus = !playStatus;
-        if (playStatus) {
-            document.body.style.background = "white";
-            document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-pause"></i>';
-        } else {
-            document.body.style.background = "#f0f0ff";
-            document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-play"></i>';
-        }
-        console.log("Exchange Play:", playStatus, document.body.style.background);
-    } 
-    
 
     let boardContainer = document.getElementById("containerBoard")
     boardContainer.innerHTML = html
@@ -77,6 +65,18 @@ function generateTheBoard(){
     board.style.width  = sides*columns+"px"
     board.style.height = sides*rows+"px"
 }
+
+function exchangePlay() {
+    playStatus = !playStatus;
+    if (playStatus) {
+        document.body.style.background = "white";
+        document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-pause"></i>';
+    } else {
+        document.body.style.background = "#f0f0ff";
+        document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-play"></i>';
+    }
+    console.log("Exchange Play:", playStatus, document.body.style.background);
+} 
 
 //Here the state of the cell will change from alive to dead.
 function cellState(c, r){
