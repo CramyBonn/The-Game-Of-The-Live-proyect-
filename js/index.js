@@ -165,7 +165,4 @@ function resizeCellSize(scale) {
 }
 
 //Karla, remember to put the code in English and specify what it is for.
-var renglones            = 50;
-var columnas             = 50;
-var tamCelulas           = 4; // Normalmente es 4
 var cantidadGeneraciones = 0; // Mayor para relantizar la vida 
