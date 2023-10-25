@@ -5,16 +5,34 @@ let sides = 20 //The number of pixels in the cell
 
 let mirror = []
 
-document.addEventListener("keydown", (e)=>{
-    e.preventDefault()
+let playStatus = false; //Variable to control the speed of the board
+
+
+document.addEventListener("keydown", (e) => {
+    e.preventDefault();
     switch (e.keyCode) {
-        case 39: // RIght key
-            nextState()
+        case 39: // Right key
+            nextState();
             break;
+        case 9: // Tab key
+            exchangePlay();
+            break;
+        case 8:
+            clean(); //eararse key    
         default:
             break;
     }
+});
+
+//Here is the instructions sections
+const instructions = document.getElementById("instructions");
+
+const closeInstructions = document.getElementById("close-instructions"); 
+
+closeInstructions.addEventListener("click", () => {
+    instructions.style.display = "none";
 })
+
 
 generateTheBoard()
 
@@ -31,6 +49,26 @@ function generateTheBoard(){
         html += "</tr>"
     }
     html += "</table>"
+
+    setInterval(() => {
+        if (playStatus) {
+            nextState()
+        }
+    }, 1000 / 60);
+
+    
+    function exchangePlay() {
+        playStatus = !playStatus;
+        if (playStatus) {
+            document.body.style.background = "white";
+            document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-pause"></i>';
+        } else {
+            document.body.style.background = "#f0f0ff";
+            document.getElementById("btn1").innerHTML = '<i class="fa-solid fa-play"></i>';
+        }
+        console.log("Exchange Play:", playStatus, document.body.style.background);
+    } 
+    
 
     let boardContainer = document.getElementById("containerBoard")
     boardContainer.innerHTML = html
@@ -50,6 +88,15 @@ function cellState(c, r){
     }
 }
 
+function clean() {
+    for (let c = 0; c < columns; c++) {
+        for (let r = 0; r < columns; r++) {
+            let cell = document.getElementById(`cell-${c + "-" + r}`);
+            cell.style.background = "";
+        }
+    }
+}
+
 //Here the mirror of the board
 function mirrorCells(){
     mirror=[]
@@ -66,8 +113,8 @@ function mirrorCells(){
 
 function liveCell(c, r){
     let live = 0
-    for (let i = -1; i < 1;i++){
-        for (let j = -1; j < 1;j++){
+    for (let i = -1; i <= 1;i++){
+        for (let j = -1; j <= 1;j++){
             if (i == 0 && j == 0)
                 continue
             try {
@@ -85,7 +132,7 @@ function liveCell(c, r){
 function nextState(){
     mirrorCells()
     for (let c = 0; c < columns; c++){
-        for (let r = 0; r < columns; r++){
+        for (let r = 0; r < rows; r++){
             let live = liveCell(c, r)
             let cell = document.getElementById(`cell-${c + "-" + r}`)
             if(mirror[c][r]){// Cell is live
@@ -99,42 +146,26 @@ function nextState(){
     }
 }
 
-//Here is the instructions sections
+  //Zoom buttons
+  document.getElementById("zoom-in").addEventListener("click", function () {
+    resizeCellSize(1.2); // Aumentar el tamaño de las celdas en un 20%
+});
 
-const instructions = document.getElementById("instructions");
+document.getElementById("zoom-out").addEventListener("click", function () {
+    resizeCellSize(0.8); // Disminuir el tamaño de las celdas en un 20%
+});
 
-const closeInstructions = document.getElementById("close-instructions"); 
+function resizeCellSize(scale) {
+    sides *= scale; // Aumentar o disminuir el tamaño de las celdas
+    let board = document.getElementById("board");
 
-closeInstructions.addEventListener("click", () => {
-    instructions.style.display = "none";
-})
+    // Recalcular el ancho y alto del tablero basado en las nuevas dimensiones de las celdas
+    board.style.width = sides * columns + "px";
+    board.style.height = sides * rows + "px";
+}
 
+//Karla, remember to put the code in English and specify what it is for.
 var renglones            = 50;
 var columnas             = 50;
 var tamCelulas           = 4; // Normalmente es 4
 var cantidadGeneraciones = 0; // Mayor para relantizar la vida 
-
-//Control
-$(document).ready(function(){
-    var funcionTiempo; //Contiene el control del tiempo.
-    //generarUniverso();
-  
-    $("#tick").click(function(event){
-      console.log("Se avanza un tick en el tiempo.");
-    });
-  
-    $("#comenzar").click(function(event){
-      console.log("El tiempo se echa a andar.");
-      window.clearInterval(funcionTiempo); //Se detiene cualquier otro ciclo anterior.
-    });
-  
-    $("#detener").click(function(event){
-      console.log("Se detiene la simulación");
-      window.clearInterval(funcionTiempo);
-    });
-  
-    $("#reiniciar").click(function(event){
-      console.log("Se reinicia la vida en el universo");
-      //generarUniverso();
-    });
-  });

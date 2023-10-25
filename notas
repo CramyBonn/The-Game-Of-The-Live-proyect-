@@ -1,0 +1,41 @@
+        <div id="controles">
+                <button class="rounded-button" id="comenzar">Comenzar</button>
+                <button class="rounded-button" id="detener">Pausar</button>
+                <button class="rounded-button" id="tick">Hacer tick</button>
+                <button class="rounded-button" id="reiniciar">Reiniciar el Universo</button>
+        </div>
+
+        
+.controles{
+    justify-content: center;
+    clear: both;
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 10px;
+    
+}
+
+        //Control (Esto ya estaba programado también)
+$(document).ready(function(){
+    var funcionTiempo; //Contiene el control del tiempo.
+    //generarUniverso();
+  
+    $("#tick").click(function(event){
+      console.log("Se avanza un tick en el tiempo.");
+    });
+  
+    $("#comenzar").click(function(event){
+      console.log("El tiempo se echa a andar.");
+      window.clearInterval(funcionTiempo); //Se detiene cualquier otro ciclo anterior.
+    });
+  
+    $("#detener").click(function(event){
+      console.log("Se detiene la simulación");
+      window.clearInterval(funcionTiempo);
+    });
+  
+    $("#reiniciar").click(function(event){
+      console.log("Se reinicia la vida en el universo");
+      //generarUniverso();
+    });

@@ -3,64 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/general.css">
-    <!--Note: Here are the icons used in the project-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Note: Here are the icons used in the project -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>The game of the life</title>
 </head>
 <body>
-    <!--Here goes the header-->
+    <!-- Here goes the header -->
     <header>
         <h1>El juego de la vida</h1>
     </header>
-    <!--Here goes to section-->
-    <section>
-        <!--Conteiner of the board-->
-        <div id="containerBoard">
-        </div>
-
-        <div id="instructions">
-            <div>
-                <h2>¡Bienvenidos al juego de la vida!</h2>
-                <h3>Intrucciones del Juego de la Vida:</h3>
-                <p>(Esto es un ejemplo de intrucciones a colocar más adelante)</p>
-                <p>¡Espero que disfrutes del juego!</p>
-            </div>
+    <!-- Here goes to section -->
+    <!-- Zoom buttons -->
+    <div id="zoom-buttons">
+        <button class="zoom-button" id="zoom-in">+</button>
+        <button class="zoom-button" id="zoom-out">-</button>
+    </div>
+    <!-- Container of the board -->
+    <div id="containerBoard">
+    </div>
+    <div id="instructions">
+        <div>
             <button id="close-instructions">X</button>
+            <h2>JUEGO DE LA VIDA</h2>
+            <p>El Juego de la Vida es un autómata celular creado por el matemático británico John Conway en 1970. A pesar de su simplicidad, el juego es conocido por su capacidad para generar patrones complejos y, en ocasiones, impredecibles.</p>
+            <h3>Reglas</h3>
+            <div class="rules">
+                <div class="rule">
+                    <p>1. Cualquier célula viva con menos de 2 vecinos vivos muere, como si estuviera por soledad.</p>
+                    <img src="img/rule1.png" alt="Regla 1">
+                </div>
+                <div class="rule">
+                    <p>2. Cualquier célula viva con 2 o 3 vecinos vivos sobrevive a la siguiente generación.</p>
+                    <img src="img/rule2.png" alt="Regla 2">
+                </div>
+                <div class="rule">
+                    <p>3. Cualquier célula viva con más de 3 vecinos vivos muere, como si estuviera por sobrepoblación.</p>
+                    <img src="img/rule3.png" alt="Regla 3">
+                </div>
+                <div class="rule">
+                    <p>4. Cualquier célula muerta con exactamente 3 vecinos vivos se convierte en una célula viva, como por reproducción.</p>
+                    <img src="img/rule4.png" alt="Regla 4">
+                </div>
+            </div>
         </div>
+    </div>
     </section>
-    <!--Here goes to footer-->
+    <!-- Here goes to footer -->
     <footer>
-         <div id="parametros">
+        <div id="parametros">
             <label for="renglones">Renglones:</label>
             <input id="renglones" value="100">
             <label for="columnas">Columnas:</label>
             <input id="columnas" value="100">
             <label for="tamanio">Tama&ntilde;o de las c&eacute;lulas</label>
-            <input id="tamanio" value="4">   
+            <input id="tamanio" value="4">
         </div>
-
         <div id="informacion">
-          <p class="informacion">Generación: 0</p>
+            <p class="informacion">Generación: 0</p>
         </div>
-        
-        <div id="controles">
-                <button class="rounded-button" id="comenzar">Comenzar</button>
-                <button class="rounded-button" id="detener">Pausar</button>
-                <button class="rounded-button" id="tick">Hacer tick</button>
-                <button class="rounded-button" id="reiniciar">Reiniciar el Universo</button>
-        </div>
-        
-        <div id="footer-buttons">
-            <button class="rounded-button">Botón 1</button>
-            <button class="rounded-button">Botón 2</button>
-            <button class="rounded-button">Botón 3</button>
-        </div>
-        
-         <label for="favcolor">Seleccione color vivo!</label>
+        <label for="favcolor">Seleccione color vivo!</label>
         <input type="color" id="favcolor" name="favcolor" value="#ff0000">
+        <div id="footer-buttons">
+            <button class="rounded-button" id="btn1" onclick="exchangePlay()">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <button id="btn2" class="rounded-button" onclick="clean()">
+                <i class="fa-solid fa-eraser"></i>
+            </button>
+            <button id="btn3" class="rounded-button" onclick="nextState()">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
     </footer>
-
+    <!-- Here goes to scripts -->
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/index.js"></script>
 </body>
